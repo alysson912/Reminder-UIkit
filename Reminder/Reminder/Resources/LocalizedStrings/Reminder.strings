@@ -7,10 +7,10 @@
 */
 
 /* MARK: - LOGIN SCREEN */
-"titleLoginLabel" = "Entre para acessar suas receitas!"
-"login.email.placeholder" = "E-mail: user@exemplo.com"
-"login.password.placeholder" = "senha:"
-"login.button.title" = "Entrar"
+"titleLoginLabel" = "Entre para acessar suas receitas!";
+"emailTextFieldPlaceholder" = "E-mail: user@exemplo.com";
+"PasswordTextFieldPlaceholder" = "Ex: password@";
+"loginButtonTitle" = "Entrar";
 
 /* MARK: - HOME SCREEN */
 

@@ -7,7 +7,17 @@
 
 import UIKit
 
+protocol LoginBottomSheetViewProtocol: AnyObject {
+    func tappedLoginButton()
+}
+
 class LoginBottomSheetView: UIView {
+    
+    private weak var delegate: LoginBottomSheetViewProtocol?
+    
+    public func delegate(delegate: LoginBottomSheetViewProtocol?){
+        self.delegate = delegate
+    }
     
     private let handleArea: UIView = {
         let view = UIView()
@@ -22,7 +32,7 @@ class LoginBottomSheetView: UIView {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Entre para acessar suas receitas!"
+        label.text = LC.titleLoginLabel.text
         label.textColor = .black
        // label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         return label
@@ -32,10 +42,10 @@ class LoginBottomSheetView: UIView {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocorrectionType = .no
-        //tf.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 0.8)
+        tf.backgroundColor = UIColor(red: 128/255, green: 128/255, blue: 128/255, alpha: 0.8)
         tf.borderStyle = .roundedRect
         tf.keyboardType = .emailAddress // defaut
-        tf.attributedPlaceholder = NSAttributedString(string: "E-mail: user@outlook.com", attributes: [ NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]) // cor customizada
+        tf.attributedPlaceholder = NSAttributedString(string: LC.emailTextFieldPlaceholder.text, attributes: [ NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]) // cor customizada
         tf.textColor = .black
         tf.clipsToBounds = true
         tf.layer.cornerRadius = 8
@@ -47,14 +57,19 @@ class LoginBottomSheetView: UIView {
     }()
     
     
+     func setupDelegateTextFields(delegate: UITextFieldDelegate) {
+        emailTextField.delegate = delegate
+        passwordTextField.delegate = delegate
+    }
+    
     lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocorrectionType = .no
-    //    tf.backgroundColor = UIColor(red: 52/255, green: 52/255, blue: 52/255, alpha: 1.0)
+        tf.backgroundColor = UIColor(red: 52/255, green: 52/255, blue: 52/255, alpha: 1.0)
         tf.borderStyle = .roundedRect
         tf.keyboardType = .emailAddress // defaut
-        tf.attributedPlaceholder = NSAttributedString(string: "password:", attributes: [ NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]) // cor customizada
+        tf.attributedPlaceholder = NSAttributedString(string: LC.PasswordTextFieldPlaceholder.text, attributes: [ NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.4)]) // cor customizada
         tf.textColor = .black
         tf.clipsToBounds = true
         tf.layer.cornerRadius = 8
@@ -70,15 +85,19 @@ class LoginBottomSheetView: UIView {
         let btn = UIButton( type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = Colors.primaryRedBase
-        btn.setTitle("Entrar", for: .normal)
+        btn.setTitle(LC.loginButtonTitle.text, for: .normal)
         btn.setBackgroundImage(UIImage( named: "gradient3"), for: .normal)
         btn.clipsToBounds = true
         btn.layer.cornerRadius =  Metrics.tiny
         btn.contentMode = .scaleAspectFill
         btn.tintColor = .white
-        // btn.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
+         btn.addTarget(self, action: #selector(tappedLoginButton), for: .touchUpInside)
         return btn
     }()
+    
+    @objc private func tappedLoginButton(_ sender: UIButton) {
+        delegate?.tappedLoginButton()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

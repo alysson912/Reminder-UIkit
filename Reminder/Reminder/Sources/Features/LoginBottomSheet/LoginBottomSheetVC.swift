@@ -15,7 +15,9 @@ class LoginBottomSheetVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dismissKeyboard()
+        screen.delegate(delegate: self)
+        screen.setupDelegateTextFields(delegate: self)
         setupUI()
         setupGesture()
     }
@@ -55,4 +57,19 @@ class LoginBottomSheetVC: UIViewController {
             completion?()
         }
     }
+}
+
+extension LoginBottomSheetVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension LoginBottomSheetVC: LoginBottomSheetViewProtocol {
+    func tappedLoginButton() {
+        print(#function)
+    }
+    
+    
 }

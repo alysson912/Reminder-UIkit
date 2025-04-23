@@ -23,9 +23,9 @@ public extension String {
         
         switch feature {
         case .presentation:
-            fileName = "RastreioBF"
+            fileName = "Reminder"
         case .acessibility:
-            fileName = "RastreioBF"
+            fileName = "Reminder"
         }
         
         return NSLocalizedString(self, tableName: fileName, bundle: .moduleBundle, value: String(), comment: String())

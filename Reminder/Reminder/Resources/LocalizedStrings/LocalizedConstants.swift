@@ -14,7 +14,10 @@ typealias LC = LocalizedConstants
 enum LocalizedConstants: String {
    
     /* MARK: - LOGIN SCREEN */
- case titleLoginLabel
+    case titleLoginLabel
+    case emailTextFieldPlaceholder
+    case PasswordTextFieldPlaceholder
+    case loginButtonTitle
 
     /* MARK: - HOME SCREEN */
 
