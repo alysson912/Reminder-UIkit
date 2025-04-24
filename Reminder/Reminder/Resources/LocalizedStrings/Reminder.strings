@@ -8,7 +8,9 @@
 
 /* MARK: - LOGIN SCREEN */
 "titleLoginLabel" = "Entre para acessar suas receitas!";
+"emailLabel" = "E-mail";
 "emailTextFieldPlaceholder" = "E-mail: user@exemplo.com";
+"passwordLabel" = "Senha";
 "PasswordTextFieldPlaceholder" = "Ex: password@";
 "loginButtonTitle" = "Entrar";
 

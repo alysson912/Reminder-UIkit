@@ -15,9 +15,16 @@ enum LocalizedConstants: String {
    
     /* MARK: - LOGIN SCREEN */
     case titleLoginLabel
+    
+    case emailLabel
     case emailTextFieldPlaceholder
+    
+    case passwordLabel
     case PasswordTextFieldPlaceholder
+    
     case loginButtonTitle
+    
+    
 
     /* MARK: - HOME SCREEN */
 

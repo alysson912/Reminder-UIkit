@@ -11,9 +11,18 @@ import Foundation
 import UIKit
 
 public struct Metrics {
-    public static let huge: CGFloat = 48
-    public static let medium: CGFloat = 24
-    public static let small: CGFloat = 12
-    public static let tiny: CGFloat = 8
-    public static let little: CGFloat = 4
+    //MARK: Anchors Values
+    
+    public static let huge: CGFloat = 48.0
+    public static let medium: CGFloat = 24.0
+    public static let small: CGFloat = 12.0
+    public static let tiny: CGFloat = 8.0
+    public static let little: CGFloat = 4.0
+    public static let buttonHeight: CGFloat = 50.0
+    
+    //MARK: Shape TextField
+    
+    public static let textFieldHeight: CGFloat = 56.0
+    public static let cornerRadius: CGFloat = 8.0
+    public static let loginButtonCornerRadius: CGFloat = 24.0
 }

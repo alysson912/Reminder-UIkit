@@ -27,8 +27,6 @@ class LoginBottomSheetVC: UIViewController {
         setupSheetConstraints()
     }
     
-  
-
     private func setupSheetConstraints() {
         NSLayoutConstraint.activate([
             screen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
