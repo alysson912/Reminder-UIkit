@@ -7,8 +7,11 @@
 
 import UIKit
 
+
 class LoginBottomSheetVC: UIViewController {
     
+    var mainNavigation: UINavigationController?
+    private var viewModel = LoginBottomSheetViewModel()
     private var screen = LoginBottomSheetView()
     var handlerAreaHeight: CGFloat = 50.0
     
@@ -18,12 +21,14 @@ class LoginBottomSheetVC: UIViewController {
         dismissKeyboard()
         screen.delegate(delegate: self)
         screen.setupDelegateTextFields(delegate: self)
+        validaTextFields()
         setupUI()
         setupGesture()
+        bindingViewModel()
     }
     private func setupUI() {
         view.addSubview(screen)
-        screen.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints 
+        screen.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
         setupSheetConstraints()
     }
     
@@ -37,6 +42,19 @@ class LoginBottomSheetVC: UIViewController {
         
     }
     
+    private func bindingViewModel() {
+        viewModel.successResult = { [weak self] in
+            // chamar a proxima tela de menu com sucesso
+            let vc = UIViewController()
+            vc.view.backgroundColor = .systemBlue
+            self?.dismiss(animated: false)
+            self?.mainNavigation?.pushViewController(vc, animated: true)
+            
+            // com erro, mostrar o erro para o usuario
+            print("Chegou na ViewController")
+        }
+    }
+    
     private func setupGesture() {
         
     }
@@ -45,7 +63,7 @@ class LoginBottomSheetVC: UIViewController {
         
     }
     
-     func animatedShow(completion: (() -> Void)? = nil) {
+    func animatedShow(completion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
         screen.transform = CGAffineTransform(translationX: 0, y: screen.frame.height)
         UIView.animate(withDuration: 0.3, animations: {
@@ -55,18 +73,42 @@ class LoginBottomSheetVC: UIViewController {
             completion?()
         }
     }
+    
+    private func validaTextFields(){
+        
+        let email: String = screen.getEmail()
+        let password: String = screen.getPassword()
+        
+        if !email.isEmpty && !password.isEmpty {
+            configButtonEnabled(true)
+        } else {
+            configButtonEnabled(false)
+        }
+    }
+    
+    private func configButtonEnabled(_ enable: Bool){
+        if enable{
+            screen.loginButton.setTitleColor(.white, for: .normal)
+            screen.loginButton.isEnabled = true
+        } else {
+            screen.loginButton.setTitleColor(.lightGray, for: .normal)
+            screen.loginButton.isEnabled = false
+        }
+    }
+    
 }
 
 extension LoginBottomSheetVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        validaTextFields()
         return true
     }
 }
 
 extension LoginBottomSheetVC: LoginBottomSheetViewProtocol {
     func tappedLoginButton() {
-        print(#function)
+        viewModel.doAuth(email: screen.getEmail(), password: screen.getPassword())
     }
     
     

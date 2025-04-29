@@ -38,7 +38,7 @@ class LoginBottomSheetView: UIView {
     }()
     
     
-    lazy var emailLabel: UILabel = {
+   private lazy var emailLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = LC.emailLabel.text
@@ -61,12 +61,12 @@ class LoginBottomSheetView: UIView {
         tf.layer.borderWidth = 1.0
         tf.layer.borderColor = UIColor.darkGray.cgColor
         
-     //   tf.text = "asdasfd234123@gmail.com"
+        tf.text = "almenezes912@gmail.com"
         return tf
     }()
         
     
-    lazy var passwordLabel: UILabel = {
+    private lazy var passwordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = LC.passwordLabel.text
@@ -75,7 +75,7 @@ class LoginBottomSheetView: UIView {
         return label
     }()
     
-    lazy var passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocorrectionType = .no
@@ -89,14 +89,15 @@ class LoginBottomSheetView: UIView {
         tf.layer.borderWidth = 1.0
         tf.layer.borderColor = UIColor.darkGray.cgColor
         tf.isSecureTextEntry = true
-//        tf.text = "9Ex12@s"
+        tf.text = "Cross912@"
         return tf
     }()
     
     
-    lazy var loginButton: UIButton = {
+     lazy var loginButton: UIButton = {
         let btn = UIButton( type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.isEnabled = false
         btn.backgroundColor = Colors.primaryRedBase
         btn.titleLabel?.font = Typography.subHeading
         btn.setTitle(LC.loginButtonTitle.text, for: .normal)
@@ -116,6 +117,17 @@ class LoginBottomSheetView: UIView {
        emailTextField.delegate = delegate
        passwordTextField.delegate = delegate
    }
+    
+    
+    public func getEmail() -> String{
+        return emailTextField.text ?? ""
+    }
+    
+    public func getPassword() -> String{
+        return passwordTextField.text ?? ""
+    }
+    
+ 
     
     override init(frame: CGRect) {
         super.init(frame: frame)
