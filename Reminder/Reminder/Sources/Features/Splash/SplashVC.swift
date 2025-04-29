@@ -3,17 +3,18 @@
 //  Reminder
 //
 //  Created by ALYSSON MENEZES on 09/04/25.
-// //MARK: SplashVC NAO CRIA MAIS A CLASSE, ELA CHAMA O FLOWDELEGATE QUE VAI NAVEGAR PRA LA 
+// //MARK: SplashVC NAO CRIA MAIS A CLASSE, ELA CHAMA O FLOWDELEGATE QUE VAI NAVEGAR PRA LA
 
 import UIKit
 
 class SplashVC: UIViewController {
 
-    private var splashView = SplashView()
+    private var contentView: SplashView
     private weak var flowDelegate: SplashFlowDelegate?
  
     // quando a classe iniciar FlowDelegate estará instanciado
-    init(flowDelegate: SplashFlowDelegate) {
+    init(contentView: SplashView, flowDelegate: SplashFlowDelegate) {
+        self.contentView = contentView
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,7 +31,7 @@ class SplashVC: UIViewController {
     }
     
     private func setup() {
-        view.addSubview(splashView)
+        view.addSubview(contentView)
         navigationController?.isNavigationBarHidden = true
         view.backgroundColor = Colors.primaryRedBase// colorindo a controller ué?
         setupConstraints()
@@ -38,19 +39,19 @@ class SplashVC: UIViewController {
     }
     
     private func setupConstraints() {
-        splashView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            splashView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            splashView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            splashView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            splashView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
         ])
     }
 
     private func setupGesture() {
-        view.addSubview(splashView)
+        view.addSubview(contentView)
         navigationController?.isNavigationBarHidden = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         self.view.addGestureRecognizer(tapGesture)

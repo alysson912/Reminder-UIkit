@@ -1,7 +1,7 @@
 //
 //  ReminderFlowController.swift = Cordinator
 //  Reminder
-//
+//MARK: - CORDINATOR
 //  Created by ALYSSON MENEZES on 29/04/25.
 //MARK: - Classe Responsavel pela Navegacao do app, cria as classes e faz a navegacao
 
@@ -9,16 +9,17 @@ import Foundation
 import UIKit
 
 class ReminderFlowController {
-    // private let viewControllerFactory
+    
     //MARK: - Properties
     public var navigationController: UINavigationController?
+    private let viewControllerFactory: ViewControllersFactoryProtocol
     
     public init() {
-        
+        self.viewControllerFactory = ViewControllersFactory()
     }
     //MARK: - Start Flow - O app Inicia nessa tela
     func start() -> UINavigationController?{
-        let startViewController = SplashVC(flowDelegate: self)
+        let startViewController = viewControllerFactory.makeSplashViewController(flowDelegate: self )
         self.navigationController = UINavigationController(rootViewController: startViewController)
         return navigationController
     }
@@ -41,7 +42,7 @@ extension ReminderFlowController: LoginBottomSheetFlowDelegate {
 
 extension ReminderFlowController: SplashFlowDelegate {
     func openLoginBottomSheet() {
-        let loginBottomSheet = LoginBottomSheetVC(flowDelegate: self)
+        let loginBottomSheet = viewControllerFactory.makeLoginViewController(flowDelegate: self)
         loginBottomSheet.modalPresentationStyle = .overCurrentContext
         loginBottomSheet.modalTransitionStyle = .crossDissolve
         navigationController?.present(loginBottomSheet, animated: false) {

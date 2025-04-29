@@ -11,13 +11,15 @@ import UIKit
 class LoginBottomSheetVC: UIViewController {
     
     private var viewModel = LoginBottomSheetViewModel()
-    private var screen = LoginBottomSheetView()
+    private var contentView: LoginBottomSheetView
+    
     var handlerAreaHeight: CGFloat = 50.0
     
     private weak var flowDelegate: LoginBottomSheetFlowDelegate?
     
     // toda vez que criarmos a LoginBottomSheetVC teremos que passar o delegate
-    init(flowDelegate: LoginBottomSheetFlowDelegate) {
+    init(contentView: LoginBottomSheetView, flowDelegate: LoginBottomSheetFlowDelegate) {
+        self.contentView = contentView
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,26 +31,26 @@ class LoginBottomSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dismissKeyboard()
-        screen.delegate(delegate: self)
-        screen.setupDelegateTextFields(delegate: self)
+        contentView.delegate(delegate: self)
+        contentView.setupDelegateTextFields(delegate: self)
         validaTextFields()
         setupUI()
         setupGesture()
         bindingViewModel()
     }
     private func setupUI() {
-        view.addSubview(screen)
-        screen.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
+        view.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
         setupSheetConstraints()
     }
     
     private func setupSheetConstraints() {
         NSLayoutConstraint.activate([
-            screen.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            screen.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            screen.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        let heightConstraint = screen.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
         
     }
     
@@ -72,9 +74,9 @@ class LoginBottomSheetVC: UIViewController {
     
     func animatedShow(completion: (() -> Void)? = nil) {
         self.view.layoutIfNeeded()
-        screen.transform = CGAffineTransform(translationX: 0, y: screen.frame.height)
+        contentView.transform = CGAffineTransform(translationX: 0, y: contentView.frame.height)
         UIView.animate(withDuration: 0.3, animations: {
-            self.screen.transform = .identity
+            self.contentView.transform = .identity
             self.view.layoutIfNeeded()
         }) { _ in
             completion?()
@@ -83,8 +85,8 @@ class LoginBottomSheetVC: UIViewController {
     
     private func validaTextFields(){
         
-        let email: String = screen.getEmail()
-        let password: String = screen.getPassword()
+        let email: String = contentView.getEmail()
+        let password: String = contentView.getPassword()
         
         if !email.isEmpty && !password.isEmpty {
             configButtonEnabled(true)
@@ -95,11 +97,11 @@ class LoginBottomSheetVC: UIViewController {
     
     private func configButtonEnabled(_ enable: Bool){
         if enable{
-            screen.loginButton.setTitleColor(.white, for: .normal)
-            screen.loginButton.isEnabled = true
+            contentView.loginButton.setTitleColor(.white, for: .normal)
+            contentView.loginButton.isEnabled = true
         } else {
-            screen.loginButton.setTitleColor(.lightGray, for: .normal)
-            screen.loginButton.isEnabled = false
+            contentView.loginButton.setTitleColor(.lightGray, for: .normal)
+            contentView.loginButton.isEnabled = false
         }
     }
     
@@ -115,7 +117,7 @@ extension LoginBottomSheetVC: UITextFieldDelegate {
 
 extension LoginBottomSheetVC: LoginBottomSheetViewProtocol {
     func tappedLoginButton() {
-        viewModel.doAuth(email: screen.getEmail(), password: screen.getPassword())
+        viewModel.doAuth(email: contentView.getEmail(), password: contentView.getPassword())
     }
     
     
