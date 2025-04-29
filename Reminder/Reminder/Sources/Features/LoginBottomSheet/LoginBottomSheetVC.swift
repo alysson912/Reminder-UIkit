@@ -10,11 +10,21 @@ import UIKit
 
 class LoginBottomSheetVC: UIViewController {
     
-    var mainNavigation: UINavigationController?
     private var viewModel = LoginBottomSheetViewModel()
     private var screen = LoginBottomSheetView()
     var handlerAreaHeight: CGFloat = 50.0
     
+    private weak var flowDelegate: LoginBottomSheetFlowDelegate?
+    
+    // toda vez que criarmos a LoginBottomSheetVC teremos que passar o delegate
+    init(flowDelegate: LoginBottomSheetFlowDelegate) {
+        self.flowDelegate = flowDelegate
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +55,7 @@ class LoginBottomSheetVC: UIViewController {
     private func bindingViewModel() {
         viewModel.successResult = { [weak self] in
             // chamar a proxima tela de menu com sucesso
-            let vc = UIViewController()
-            vc.view.backgroundColor = .systemBlue
-            self?.dismiss(animated: false)
-            self?.mainNavigation?.pushViewController(vc, animated: true)
+            self?.flowDelegate?.navigateToHome()
             
             // com erro, mostrar o erro para o usuario
             print("Chegou na ViewController")
