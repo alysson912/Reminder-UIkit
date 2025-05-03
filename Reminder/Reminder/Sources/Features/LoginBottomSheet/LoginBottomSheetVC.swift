@@ -54,16 +54,31 @@ class LoginBottomSheetVC: UIViewController {
         
     }
     
+    
     private func bindingViewModel() {
-        viewModel.successResult = { [weak self] in
-            // chamar a proxima tela de menu com sucesso
-            self?.flowDelegate?.navigateToHome()
-            
-            // com erro, mostrar o erro para o usuario
-            print("Chegou na ViewController")
+        viewModel.successResult = { [weak self] userNameLogin in
+            self?.presentSaveLoginAlert(email: userNameLogin)
+           
         }
     }
     
+    private func presentSaveLoginAlert(email: String) {
+        let alertController = UIAlertController(title: "Salvar Acesso", message: "Deseja salvar o acesso ?", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Salvar", style: .default) {_ in
+            let user = User(email: email, isUserSaved: true)
+            UserDefaultsManager.saveUser(user: user)
+            self.flowDelegate?.navigateToHome()
+        }
+        let cancelAction = UIAlertAction(title: "Nao", style: .cancel) {_ in
+            self.flowDelegate?.navigateToHome()
+        }
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true)
+    }
+  
+      
     private func setupGesture() {
         
     }
@@ -117,7 +132,7 @@ extension LoginBottomSheetVC: UITextFieldDelegate {
 
 extension LoginBottomSheetVC: LoginBottomSheetViewProtocol {
     func tappedLoginButton() {
-        viewModel.doAuth(email: contentView.getEmail(), password: contentView.getPassword())
+        viewModel.doAuth(userNameLogin: contentView.getEmail(), password: contentView.getPassword())
     }
     
     

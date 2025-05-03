@@ -3,22 +3,27 @@
 //  Reminder
 //
 //  Created by ALYSSON MENEZES on 29/04/25.
-//
+//MARK: FACTORY TEM A RESPONSABILIDADE DE CRIAR NOSSAS CLASSES/ TELAS
 
 import Foundation
 
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
+  
     func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashVC {
         let contentView = SplashView()
         let viewController = SplashVC(contentView: contentView, flowDelegate: flowDelegate)
         return viewController
     }
-    ;
+    
     func makeLoginViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetVC {
         let contentView = LoginBottomSheetView()
         let viewController = LoginBottomSheetVC(contentView: contentView, flowDelegate: flowDelegate)
         return viewController
     }
     
-    
+//    func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController {
+//        let contentView = HomeView()
+//        let viewController = HomeViewController(contentView: contentView, flowDelegate: flowDelegate)
+//        return viewController
+//    }
 }
