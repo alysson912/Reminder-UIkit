@@ -26,7 +26,7 @@ class SplashVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupGesture()
-        decideNavigationFlow()
+        startBreathingAnimation() // animacao para atrasar a navegacao em 0.8
        setup()
     }
     
@@ -38,6 +38,8 @@ class SplashVC: UIViewController {
             showLoginBottomSheet()
         }
     }
+    
+    
     
     private func setup() {
         view.addSubview(contentView)
@@ -68,7 +70,28 @@ class SplashVC: UIViewController {
     
     @objc
     private func showLoginBottomSheet() {
+        animateLogoUp()
         self.flowDelegate?.openLoginBottomSheet()
         }
     }
 
+//MARK: Animations
+extension SplashVC {
+    private func startBreathingAnimation() {
+        UIView.animate(withDuration: 1.5,
+                       delay: 0.0,
+                       animations: {
+            self.contentView.logoImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        }) { _ in
+            self.decideNavigationFlow()
+        }
+    }
+    private func animateLogoUp() {
+        UIView.animate(withDuration: 0.5,
+                       delay: 0.0,
+                       options: [.curveEaseOut],
+                       animations: {
+            self.contentView.logoImageView.transform = self.contentView.logoImageView.transform.translatedBy(x: 0, y: -130)
+        })
+    }
+}

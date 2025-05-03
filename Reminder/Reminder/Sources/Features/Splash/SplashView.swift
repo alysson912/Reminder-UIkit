@@ -21,25 +21,15 @@ class SplashView: UIView {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFill
-        image.image = UIImage( systemName:  "plus.magnifyingglass" )
+        image.image = UIImage(named: "reminderLogo")
         image.tintColor = .white
         return image
     }()
     
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Remind!"
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-        return label
-    }()
     
     private func addViews() {
         addSubview(backGroundView)
-        backGroundView.addSubview(titleLabel)
         backGroundView.addSubview(logoImageView)
     }
 
@@ -60,13 +50,12 @@ class SplashView: UIView {
             backGroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
             backGroundView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
             
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 24),
-            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Metrics.medium),
+            logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Metrics.medium),
             
-            logoImageView.trailingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: -8),
-            logoImageView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            logoImageView.widthAnchor.constraint(equalToConstant: 65),
-            logoImageView.heightAnchor.constraint(equalToConstant: 65),
+//            logoImageView.trailingAnchor.constraint(equalTo: leadingAnchor, constant: -8),
+            logoImageView.widthAnchor.constraint(equalToConstant: 85),
+            logoImageView.heightAnchor.constraint(equalToConstant: 85),
         ])
     }
 }
