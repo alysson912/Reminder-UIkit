@@ -8,7 +8,7 @@
 import UIKit
 
 
-class LoginBottomSheetVC: UIViewController {
+class LoginBottomSheetViewController: UIViewController {
     
     private var viewModel = LoginBottomSheetViewModel()
     private var contentView: LoginBottomSheetView
@@ -58,10 +58,22 @@ class LoginBottomSheetVC: UIViewController {
     private func bindingViewModel() {
         viewModel.successResult = { [weak self] userNameLogin in
             self?.presentSaveLoginAlert(email: userNameLogin)
-           
+        }
+        
+        viewModel.errorResult = { [weak self] errorMessage in
+            self?.presentErrorAlert(message: errorMessage)
         }
     }
-    
+        private func presentErrorAlert(message: String) {
+            let alertController = UIAlertController(title: "Erro ao Logar", message: message, preferredStyle: .alert)
+            
+            let retryAction = UIAlertAction(title: "Tentar novamente", style: .default)
+            alertController.addAction(retryAction)
+            
+            self.present(alertController, animated: true)
+        }
+  
+            
     private func presentSaveLoginAlert(email: String) {
         let alertController = UIAlertController(title: "Salvar Acesso", message: "Deseja salvar o acesso ?", preferredStyle: .alert)
         
@@ -122,7 +134,7 @@ class LoginBottomSheetVC: UIViewController {
     
 }
 
-extension LoginBottomSheetVC: UITextFieldDelegate {
+extension LoginBottomSheetViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         validaTextFields()
@@ -130,7 +142,7 @@ extension LoginBottomSheetVC: UITextFieldDelegate {
     }
 }
 
-extension LoginBottomSheetVC: LoginBottomSheetViewProtocol {
+extension LoginBottomSheetViewController: LoginBottomSheetViewProtocol {
     func tappedLoginButton() {
         viewModel.doAuth(userNameLogin: contentView.getEmail(), password: contentView.getPassword())
     }

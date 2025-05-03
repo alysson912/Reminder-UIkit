@@ -15,9 +15,9 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
         return viewController
     }
     
-    func makeLoginViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetVC {
+    func makeLoginViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetViewController {
         let contentView = LoginBottomSheetView()
-        let viewController = LoginBottomSheetVC(contentView: contentView, flowDelegate: flowDelegate)
+        let viewController = LoginBottomSheetViewController(contentView: contentView, flowDelegate: flowDelegate)
         return viewController
     }
     
