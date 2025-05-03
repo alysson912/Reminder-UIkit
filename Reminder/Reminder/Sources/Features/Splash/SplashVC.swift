@@ -25,9 +25,18 @@ class SplashVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // ciclo de decisao se vai para login ou menu
+        setupGesture()
+        decideNavigationFlow()
        setup()
+    }
+    
+    private func decideNavigationFlow() {
+        //Decisao de fluxo de usuario salvo
+        if let user = UserDefaultsManager.loadUser(), user.isUserSaved {
+            flowDelegate?.navigateToHome()
+        } else {
+            showLoginBottomSheet()
+        }
     }
     
     private func setup() {
