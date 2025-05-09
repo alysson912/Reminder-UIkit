@@ -7,6 +7,9 @@
 
 import UIKit
 
+public protocol LoginBottomSheetFlowDelegate: AnyObject {
+    func navigateToHome()
+}
 
 class LoginBottomSheetViewController: UIViewController {
     
@@ -30,28 +33,24 @@ class LoginBottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dismissKeyboard()
+        
         contentView.delegate(delegate: self)
         contentView.setupDelegateTextFields(delegate: self)
-        validaTextFields()
+        
         setupUI()
         setupGesture()
         bindingViewModel()
     }
     private func setupUI() {
         view.addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
+        dismissKeyboard()
         setupSheetConstraints()
+        validaTextFields()
     }
     
     private func setupSheetConstraints() {
-        NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        setupContentViewToBounds(contentView: contentView)
         let heightConstraint = contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
-        
     }
     
     
@@ -142,7 +141,7 @@ extension LoginBottomSheetViewController: UITextFieldDelegate {
     }
 }
 
-extension LoginBottomSheetViewController: LoginBottomSheetViewProtocol {
+extension LoginBottomSheetViewController: LoginBottomSheetViewDelegate {
     func tappedLoginButton() {
         viewModel.doAuth(userNameLogin: contentView.getEmail(), password: contentView.getPassword())
     }

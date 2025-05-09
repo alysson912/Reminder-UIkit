@@ -16,6 +16,9 @@
 
 /* MARK: - HOME SCREEN */
 
+"welcomeLabel" = "Boas Vindas!";
+"feedBackButton" = "Avaliar";
+
 /* MARK: - RECEIPTS SCREEN */
 
 /* MARK: - NEWRECEIPT SCREEN */

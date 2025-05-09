@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ViewControllersFactoryProtocol: AnyObject {
+    func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashVC
+    func makeLoginViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetViewController
+    func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController
+}
+
+
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
   
     func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashVC {
@@ -21,9 +28,9 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
         return viewController
     }
     
-//    func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController {
-//        let contentView = HomeView()
-//        let viewController = HomeViewController(contentView: contentView, flowDelegate: flowDelegate)
-//        return viewController
-//    }
+    func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController {
+        let contentView = HomeView()
+        let viewController = HomeViewController(contentView: contentView, flowDelegate: flowDelegate)
+        return viewController
+    }
 }

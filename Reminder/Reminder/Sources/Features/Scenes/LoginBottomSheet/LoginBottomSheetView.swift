@@ -7,15 +7,15 @@
 
 import UIKit
 
-protocol LoginBottomSheetViewProtocol: AnyObject {
+protocol LoginBottomSheetViewDelegate: AnyObject {
     func tappedLoginButton()
 }
 
 class LoginBottomSheetView: UIView {
     
-    private weak var delegate: LoginBottomSheetViewProtocol?
+    private weak var delegate: LoginBottomSheetViewDelegate?
     
-    public func delegate(delegate: LoginBottomSheetViewProtocol?){
+    public func delegate(delegate: LoginBottomSheetViewDelegate?){
         self.delegate = delegate
     }
     
@@ -51,7 +51,7 @@ class LoginBottomSheetView: UIView {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocorrectionType = .no
-       // tf.backgroundColor = Colors.primaryRedBase
+        tf.backgroundColor = .clear // Colors.primaryRedBase
         tf.borderStyle = .roundedRect
         tf.keyboardType = .emailAddress // defaut
         tf.placeholder = LC.emailTextFieldPlaceholder.text
@@ -79,7 +79,7 @@ class LoginBottomSheetView: UIView {
         let tf = UITextField()
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.autocorrectionType = .no
-       // tf.backgroundColor = Colors.primaryRedBase
+        tf.backgroundColor = .clear //Colors.primaryRedBase
         tf.borderStyle = .roundedRect
         tf.keyboardType = .emailAddress // defaut
         tf.placeholder =  LC.PasswordTextFieldPlaceholder.text
@@ -127,8 +127,6 @@ class LoginBottomSheetView: UIView {
         return passwordTextField.text ?? ""
     }
     
- 
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -144,15 +142,13 @@ class LoginBottomSheetView: UIView {
         addSubview(passwordLabel)
         addSubview(passwordTextField)
         addSubview(loginButton)
-    
         setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+        
     private func setupConstraints() {
         NSLayoutConstraint.activate([
 //            handleArea.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.small),
@@ -181,7 +177,6 @@ class LoginBottomSheetView: UIView {
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             passwordTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: Metrics.textFieldHeight),
-            
             
             loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             loginButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),

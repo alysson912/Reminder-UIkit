@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+
+
 class SplashView: UIView {
         
     
@@ -45,15 +48,14 @@ class SplashView: UIView {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            backGroundView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            backGroundView.topAnchor.constraint(equalTo: topAnchor),
             backGroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backGroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            backGroundView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            backGroundView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -Metrics.medium),
             
-//            logoImageView.trailingAnchor.constraint(equalTo: leadingAnchor, constant: -8),
             logoImageView.widthAnchor.constraint(equalToConstant: 85),
             logoImageView.heightAnchor.constraint(equalToConstant: 85),
         ])

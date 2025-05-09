@@ -27,7 +27,8 @@ enum LocalizedConstants: String {
     
 
     /* MARK: - HOME SCREEN */
-
+    case welcomeLabel
+    case feedBackButton
     /* MARK: - RECEIPTS SCREEN */
 
     /* MARK: - NEWRECEIPT SCREEN */

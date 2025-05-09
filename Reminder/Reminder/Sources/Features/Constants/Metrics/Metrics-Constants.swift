@@ -25,4 +25,9 @@ public struct Metrics {
     public static let textFieldHeight: CGFloat = 56.0
     public static let cornerRadius: CGFloat = 8.0
     public static let loginButtonCornerRadius: CGFloat = 24.0
+    
+    //MARK: Size Image
+    
+    public static let profileImageSize: CGFloat = 68.0
+    public static let backgroundProfileSize: CGFloat = 240.0
 }

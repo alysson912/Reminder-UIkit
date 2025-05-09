@@ -7,6 +7,11 @@
 
 import UIKit
 
+public protocol SplashFlowDelegate: AnyObject {
+    func openLoginBottomSheet()
+    func navigateToHome()
+}
+
 class SplashVC: UIViewController {
 
     private var contentView: SplashView
@@ -27,7 +32,7 @@ class SplashVC: UIViewController {
         super.viewDidLoad()
         setupGesture()
         startBreathingAnimation() // animacao para atrasar a navegacao em 0.8
-       setup()
+        setup()
     }
     
     private func decideNavigationFlow() {
@@ -44,25 +49,17 @@ class SplashVC: UIViewController {
     private func setup() {
         view.addSubview(contentView)
         navigationController?.isNavigationBarHidden = true
-        view.backgroundColor = Colors.primaryRedBase// colorindo a controller ué?
+       // view.backgroundColor = Colors.primaryRedBase// colorindo a controller ué?
         setupConstraints()
         setupGesture()
     }
     
     private func setupConstraints() {
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-        ])
+        setupContentViewToBounds(contentView: contentView)
     }
 
     private func setupGesture() {
-        view.addSubview(contentView)
         navigationController?.isNavigationBarHidden = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         self.view.addGestureRecognizer(tapGesture)
