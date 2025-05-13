@@ -60,7 +60,6 @@ class SplashVC: UIViewController {
     }
 
     private func setupGesture() {
-        navigationController?.isNavigationBarHidden = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
         self.view.addGestureRecognizer(tapGesture)
     }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class HomeViewController: UIViewController {
     
     private var contentView: HomeView
@@ -24,13 +26,46 @@ class HomeViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+        //view.backgroundColor = .white
+        contentView.delegate(delegate: self)
         setupUI()
+        //setupNavigationBar()
     }
 
     private func setupUI() {
         navigationController?.navigationBar.isHidden = true
+        view.backgroundColor = Colors.gray600
         view.addSubview(contentView)
         setupContentViewToBounds(contentView: contentView) // constraints
     }
 
 }
+
+extension HomeViewController: HomeFlowDelegate {
+    func logoutButtonAction() {
+        flowDelegate?.logoutButtonAction()
+    }
+    
+    func backButtonAction() {
+        flowDelegate?.backButtonAction()
+    }
+    
+    
+}
+
+
+//MARK: Adicionando Itens via navigationBar
+//    private func setupNavigationBar() {
+//        navigationController?.navigationBar.isHidden = false
+//        navigationItem.hidesBackButton = true
+//        let logOutButton = UIBarButtonItem(image: UIImage(named: "logoutIcon"),
+//                                           style: .plain,
+//                                           target: self,
+//                                           action: #selector(logoutAction))
+//        logOutButton.tintColor = Colors.primaryRedBase
+//        navigationItem.rightBarButtonItem = logOutButton
+//    }
+//    @objc
+//    private func logoutAction() {
+//        printContent("logoutAction")
+//    }

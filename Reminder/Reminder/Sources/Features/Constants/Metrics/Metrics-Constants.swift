@@ -26,8 +26,13 @@ public struct Metrics {
     public static let cornerRadius: CGFloat = 8.0
     public static let loginButtonCornerRadius: CGFloat = 24.0
     
-    //MARK: Size Image
+    //MARK: Image Size
     
     public static let profileImageSize: CGFloat = 68.0
     public static let backgroundProfileSize: CGFloat = 240.0
+    
+    //MARK: HomeButton Size
+    
+    public static let homeButtonWidth: CGFloat = 24.0
+    public static let homeButtonHeight: CGFloat = 24.0
 }

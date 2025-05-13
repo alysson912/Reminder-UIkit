@@ -56,5 +56,13 @@ extension ReminderFlowController: SplashFlowDelegate {
 
 
 extension ReminderFlowController: HomeFlowDelegate {
+  
+    func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func logoutButtonAction() {
+        print("Sair do App")
+    }
     
 }
