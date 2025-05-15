@@ -46,10 +46,6 @@ extension HomeViewController: HomeFlowDelegate {
         flowDelegate?.logoutButtonAction()
     }
     
-    func backButtonAction() {
-        flowDelegate?.backButtonAction()
-    }
-    
     
 }
 

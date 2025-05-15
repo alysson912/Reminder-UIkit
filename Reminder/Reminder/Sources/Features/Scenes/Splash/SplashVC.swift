@@ -30,8 +30,6 @@ class SplashVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGesture()
-        startBreathingAnimation() // animacao para atrasar a navegacao em 0.8
         setup()
     }
     
@@ -52,6 +50,7 @@ class SplashVC: UIViewController {
        // view.backgroundColor = Colors.primaryRedBase// colorindo a controller ué?
         setupConstraints()
         setupGesture()
+        startBreathingAnimation() // animacao para atrasar a navegacao em 0.8
     }
     
     private func setupConstraints() {

@@ -16,7 +16,7 @@ class LoginBottomSheetViewController: UIViewController {
     private var viewModel = LoginBottomSheetViewModel()
     private var contentView: LoginBottomSheetView
     
-    var handlerAreaHeight: CGFloat = 50.0
+   // var handlerAreaHeight: CGFloat = 50.0
     
     private weak var flowDelegate: LoginBottomSheetFlowDelegate?
     
@@ -33,18 +33,17 @@ class LoginBottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        setupUI()
+        bindingViewModel()
         
         contentView.delegate(delegate: self)
         contentView.setupDelegateTextFields(delegate: self)
-        
-        setupUI()
-        setupGesture()
-        bindingViewModel()
     }
     private func setupUI() {
         view.addSubview(contentView)
-        dismissKeyboard()
         setupSheetConstraints()
+        dismissKeyboard()
         validaTextFields()
     }
     
