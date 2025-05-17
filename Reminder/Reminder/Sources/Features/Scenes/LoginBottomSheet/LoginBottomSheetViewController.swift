@@ -42,14 +42,18 @@ class LoginBottomSheetViewController: UIViewController {
     }
     private func setupUI() {
         view.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
         setupSheetConstraints()
-        dismissKeyboard()
-        validaTextFields()
     }
     
     private func setupSheetConstraints() {
-        setupContentViewToBounds(contentView: contentView)
+        NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
         let heightConstraint = contentView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+        
     }
     
     
