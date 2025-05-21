@@ -44,6 +44,8 @@ class LoginBottomSheetViewController: UIViewController {
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false // garantindo que siga nossas constraints
         setupSheetConstraints()
+        dismissKeyboard()
+        validaTextFields()
     }
     
     private func setupSheetConstraints() {

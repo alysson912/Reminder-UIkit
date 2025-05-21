@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         //view.backgroundColor = .white
         contentView.delegate(delegate: self)
+        contentView.homeDelegate(homeDelegate: self)
         setupUI()
         //setupNavigationBar()
     }
@@ -42,12 +43,46 @@ class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: HomeFlowDelegate {
+
     func logoutButtonAction() {
+        UserDefaultsManager.removeUser()
         flowDelegate?.logoutButtonAction()
+    }
+    
+}
+
+//MARK: HOMEIMAGE DELEGATE
+extension HomeViewController: HomeViewImageUserDelegate {
+    func didTapProfileImage() {
+        selectProfileImage()
     }
     
     
 }
+
+extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    private func selectProfileImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self // conectando os delegates
+        imagePicker.sourceType = .photoLibrary // acessando a biblioteca de fotos
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true)
+    }
+    
+    // criando controller para picker
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[.editedImage] as? UIImage {
+            contentView.profileImageView.image = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            contentView.profileImageView.image = originalImage
+    }
+        dismiss(animated: true)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+}
+
 
 
 //MARK: Adicionando Itens via navigationBar

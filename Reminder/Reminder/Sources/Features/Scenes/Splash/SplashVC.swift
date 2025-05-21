@@ -24,6 +24,11 @@ class SplashVC: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        animateLogoToCenter()
+    }
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -81,12 +86,31 @@ extension SplashVC {
             self.decideNavigationFlow()
         }
     }
+    
+
+    
     private func animateLogoUp() {
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        options: [.curveEaseOut],
                        animations: {
             self.contentView.logoImageView.transform = self.contentView.logoImageView.transform.translatedBy(x: 0, y: -130)
+        })
+    }
+    
+     func animateLogoToCenter() {
+         
+         UIView.animate(withDuration: 1.5,
+                        delay: 0.0,
+                        animations: {
+             self.contentView.logoImageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+         })
+         
+        UIView.animate(withDuration: 0.0,
+                       delay: 0.0,
+                       options: [.curveEaseOut],
+                       animations: {
+            self.contentView.logoImageView.transform = self.contentView.logoImageView.transform.translatedBy(x: 0, y: 0)
         })
     }
 }

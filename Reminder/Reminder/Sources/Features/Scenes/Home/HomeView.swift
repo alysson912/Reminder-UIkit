@@ -9,14 +9,28 @@ import UIKit
 
 protocol HomeFlowDelegate: AnyObject {
     func logoutButtonAction()
+ //   func navigateToRecipes()
+   
+}
+
+protocol HomeViewImageUserDelegate: AnyObject {
+    func didTapProfileImage()
 }
 
 class HomeView: UIView {
     
+    //MARK: ACTION IN CORDINATOR
     private weak var delegate: HomeFlowDelegate?
     
     public func delegate(delegate: HomeFlowDelegate?) {
         self.delegate = delegate
+    }
+    
+    //MARK: IMAGEPICKER DELEGATE
+    private weak var homeDelegate: HomeViewImageUserDelegate?
+    
+    public func homeDelegate(homeDelegate: HomeViewImageUserDelegate?) {
+        self.homeDelegate = homeDelegate
     }
     
     private lazy var contentBackGroundView: UIView = {
@@ -55,11 +69,12 @@ class HomeView: UIView {
         return label
     }()
     
-    private lazy var profileImageView: UIImageView = {
+     lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
         imageView.image = UIImage(systemName: "person.fill")//UIImage(named: "")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = Metrics.huge
         return imageView
@@ -105,7 +120,22 @@ class HomeView: UIView {
         
         addSubview(contentBackGroundView)
         contentBackGroundView.addSubview(feedBackButton)
+        //
+        setupImageGesture()
+    }
+    //MARK: MAPEANDO O CLICK NA USERIMAGE
+    func setupImageGesture() {
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(profileImageTapped))
         
+        profileImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc
+    private func profileImageTapped() {
+    // imagem foi clicada
+        homeDelegate?.didTapProfileImage()
     }
     
     override init(frame: CGRect) {

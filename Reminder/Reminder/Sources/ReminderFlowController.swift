@@ -56,7 +56,8 @@ extension ReminderFlowController: SplashFlowDelegate {
 
 
 extension ReminderFlowController: HomeFlowDelegate {
-  
+    
+    
     func logoutButtonAction() {
         UserDefaultsManager.removeUser()
         navigationController?.popViewController(animated: true)
