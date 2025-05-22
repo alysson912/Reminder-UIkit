@@ -71,6 +71,24 @@ class HomeView: UIView {
         return text
     }()
     
+    let myPrescriptionButton: BottomHomeView = {
+        let button = BottomHomeView(
+            icon: UIImage(systemName: "newspaper"),
+            titleLabel: "Minhas Receitas",
+            descriptionLabel: "Acompanhe os medicamentos e gerencies os lembretes")
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    let newPrescritonButton: BottomHomeView = {
+        let button = BottomHomeView(
+            icon: UIImage(systemName: "pill"),
+            titleLabel: "Nova Receita",
+            descriptionLabel: "Cadastre novos lembretes de receitas")
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
      lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -93,6 +111,7 @@ class HomeView: UIView {
          btn.addTarget(self, action: #selector(tappedLogOutButton), for: .touchUpInside)
         return btn
     }()
+    
     
     lazy var feedBackButton: UIButton = {
         let btn = UIButton( type: .system)
@@ -121,6 +140,8 @@ class HomeView: UIView {
         
         addSubview(contentBackGroundView)
         contentBackGroundView.addSubview(feedBackButton)
+        contentBackGroundView.addSubview(myPrescriptionButton)
+        contentBackGroundView.addSubview(newPrescritonButton)
         //
         setupImageGesture()
     }
@@ -194,6 +215,16 @@ class HomeView: UIView {
             feedBackButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             feedBackButton.bottomAnchor.constraint(equalTo: contentBackGroundView.bottomAnchor, constant: -Metrics.medium),
             feedBackButton.heightAnchor.constraint(equalToConstant: Metrics.buttonHeight),
+            
+            myPrescriptionButton.topAnchor.constraint(equalTo: contentBackGroundView.topAnchor, constant: Metrics.huge),
+            myPrescriptionButton.leadingAnchor.constraint(equalTo: contentBackGroundView.leadingAnchor, constant: Metrics.medium),
+            myPrescriptionButton.trailingAnchor.constraint(equalTo: contentBackGroundView.trailingAnchor, constant: -Metrics.medium),
+            myPrescriptionButton.heightAnchor.constraint(equalToConstant: 112),
+            
+            newPrescritonButton.topAnchor.constraint(equalTo: myPrescriptionButton.bottomAnchor, constant: Metrics.medium),
+            newPrescritonButton.leadingAnchor.constraint(equalTo: myPrescriptionButton.leadingAnchor),
+            newPrescritonButton.trailingAnchor.constraint(equalTo: myPrescriptionButton.trailingAnchor),
+            newPrescritonButton.heightAnchor.constraint(equalTo: myPrescriptionButton.heightAnchor),
         ])
     }
     

@@ -28,10 +28,11 @@ class HomeViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        //view.backgroundColor = .white
         contentView.delegate(delegate: self)
         contentView.homeDelegate(homeDelegate: self)
         contentView.setupNameTextField(delegate: self)
+        dismissKeyboard()
+        
         setupUI()
         checkForExistingData()
     }
