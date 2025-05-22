@@ -33,6 +33,7 @@ class HomeView: UIView {
         self.homeDelegate = homeDelegate
     }
     
+
     private lazy var contentBackGroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -60,13 +61,14 @@ class HomeView: UIView {
     }()
     
     
-    lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "NameLabel!"
-        label.textColor = Colors.gray100
-        label.font = Typography.heading
-        return label
+    lazy var nameTextField: UITextField = {
+        let text = UITextField()
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.placeholder = "nome:"
+        text.returnKeyType = .done
+        text.textColor = Colors.gray100
+        text.font = Typography.heading
+        return text
     }()
     
      lazy var profileImageView: UIImageView = {
@@ -116,7 +118,7 @@ class HomeView: UIView {
         profileBackGroundView.addSubview(profileImageView)
         profileBackGroundView.addSubview(logOutButton)
         profileBackGroundView.addSubview(welcomeLabel)
-        profileBackGroundView.addSubview(nameLabel)
+        profileBackGroundView.addSubview(nameTextField)
         
         addSubview(contentBackGroundView)
         contentBackGroundView.addSubview(feedBackButton)
@@ -137,6 +139,17 @@ class HomeView: UIView {
     // imagem foi clicada
         homeDelegate?.didTapProfileImage()
     }
+    
+    func setupNameTextField(delegate: UITextFieldDelegate) {
+        nameTextField.addTarget(self, action: #selector(nameTextFieldDidEndEditing), for: .editingDidEnd)
+        nameTextField.delegate = delegate
+   }
+    @objc
+   private func nameTextFieldDidEndEditing() {
+       let userName = nameTextField.text ?? ""
+       UserDefaultsManager.saveUserName(userName: userName)
+    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -169,8 +182,8 @@ class HomeView: UIView {
             welcomeLabel.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: Metrics.small),
             welcomeLabel.leadingAnchor.constraint(equalTo: profileImageView.leadingAnchor),
             
-            nameLabel.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
-            nameLabel.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
+            nameTextField.topAnchor.constraint(equalTo: welcomeLabel.bottomAnchor, constant: Metrics.little),
+            nameTextField.leadingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor),
             
             
             contentBackGroundView.topAnchor.constraint(equalTo: profileBackGroundView.bottomAnchor),

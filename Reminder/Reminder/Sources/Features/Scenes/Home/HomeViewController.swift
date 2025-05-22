@@ -13,10 +13,12 @@ class HomeViewController: UIViewController {
     
     private var contentView: HomeView
     private weak var flowDelegate: HomeFlowDelegate?
+    private let viewModel: HomeViewModel
     
     init(contentView: HomeView, flowDelegate: HomeFlowDelegate) {
         self.contentView = contentView
         self.flowDelegate = flowDelegate
+        self.viewModel = HomeViewModel()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,8 +31,9 @@ class HomeViewController: UIViewController {
         //view.backgroundColor = .white
         contentView.delegate(delegate: self)
         contentView.homeDelegate(homeDelegate: self)
+        contentView.setupNameTextField(delegate: self)
         setupUI()
-        //setupNavigationBar()
+        checkForExistingData()
     }
 
     private func setupUI() {
@@ -39,7 +42,16 @@ class HomeViewController: UIViewController {
         view.addSubview(contentView)
         setupContentViewToBounds(contentView: contentView) // constraints
     }
-
+    
+    //MARK: Buscando dados sauvos no UserDefaults
+   private func checkForExistingData() {
+        if let user = UserDefaultsManager.loadUser() {
+            contentView.nameTextField.text = UserDefaultsManager.loadUserName()
+        }
+    }
+    
+    
+    
 }
 
 extension HomeViewController: HomeFlowDelegate {
@@ -83,7 +95,18 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
-
+extension HomeViewController: UITextFieldDelegate {
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        let userName = contentView.nameTextField.text ?? ""
+        UserDefaultsManager.saveUserName(userName: userName)
+        
+        textField.resignFirstResponder()
+        return true
+    }
+}
 
 //MARK: Adicionando Itens via navigationBar
 //    private func setupNavigationBar() {
