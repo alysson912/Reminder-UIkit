@@ -98,12 +98,12 @@ class BottomHomeView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: iconView.trailingAnchor, constant: Metrics.medium16),
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metrics.medium16),
             
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.medium),
+            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -Metrics.small),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Metrics.medium16),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.small),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: Metrics.medium16),
             
-            arrowImageView.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            arrowImageView.centerYAnchor.constraint(equalTo: iconView.centerYAnchor),
             arrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium16),
             arrowImageView.widthAnchor.constraint(equalToConstant: 16),
           //  arrowImageView.heightAnchor.constraint(equalToConstant: 16),

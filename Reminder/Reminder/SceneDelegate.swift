@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        flowController = ReminderFlowController()
-        let rootViewController = flowController?.start()
+      //  flowController = ReminderFlowController()
+        let rootViewController = NewReceiptViewController() //flowController?.start()
         
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()

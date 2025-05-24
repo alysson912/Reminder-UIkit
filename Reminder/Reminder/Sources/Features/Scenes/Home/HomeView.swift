@@ -77,6 +77,7 @@ class HomeView: UIView {
             titleLabel: "Minhas Receitas",
             descriptionLabel: "Acompanhe os medicamentos e gerencies os lembretes")
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .purple
         return button
     }()
     
@@ -86,6 +87,7 @@ class HomeView: UIView {
             titleLabel: "Nova Receita",
             descriptionLabel: "Cadastre novos lembretes de receitas")
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = Colors.primaryRedBase
         return button
     }()
     

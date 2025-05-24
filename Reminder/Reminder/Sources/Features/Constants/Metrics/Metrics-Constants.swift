@@ -16,6 +16,7 @@ public struct Metrics {
     public static let huge: CGFloat = 48.0
     public static let medium: CGFloat = 24.0
     public static let medium16: CGFloat = 16.0
+    public static let high: CGFloat = 32.0
     public static let small: CGFloat = 12.0
     public static let tiny: CGFloat = 8.0
     public static let little: CGFloat = 4.0
