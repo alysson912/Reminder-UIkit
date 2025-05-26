@@ -13,10 +13,6 @@ protocol NewReceiptViewDelegate: AnyObject {
  //   func navigateToRecipes()
 }
 
-//protocol NewReceiptviewFlowDelegate: AnyObject {
-//   func nextScreen()
-//   
-//}
 
 class NewReceiptView: UIView {
 

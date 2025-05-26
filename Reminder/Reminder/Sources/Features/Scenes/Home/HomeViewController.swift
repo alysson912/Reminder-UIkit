@@ -28,12 +28,13 @@ class HomeViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.delegate(delegate: self)
+        
         contentView.homeDelegate(homeDelegate: self)
         contentView.setupNameTextField(delegate: self)
         dismissKeyboard()
         
         setupUI()
+        setupActionForNewRecipe()
         checkForExistingData()
     }
 
@@ -55,26 +56,29 @@ class HomeViewController: UIViewController {
        }
     }
     
-    
-    
-}
-
-extension HomeViewController: HomeFlowDelegate {
-
-    func logoutButtonAction() {
-        UserDefaultsManager.removeUser()
-        flowDelegate?.logoutButtonAction()
+    private func setupActionForNewRecipe() {
+        // disparar o click do botao
+        contentView.newPrescritonButton.tapAction = { [weak self] in
+            self?.didTapNewPrescritionButton()
+        }
     }
     
 }
 
+
 //MARK: HOMEIMAGE DELEGATE
-extension HomeViewController: HomeViewImageUserDelegate {
+extension HomeViewController: HomeViewDelegate {
     func didTapProfileImage() {
         selectProfileImage()
     }
     
+    func didTapNewPrescritionButton() {
+        flowDelegate?.navigateToRecipes()
+    }
     
+    func logoutButtonAction() {
+        flowDelegate?.logoutButtonAction()
+    }
 }
 
 extension HomeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -103,8 +107,6 @@ extension HomeViewController: UIImagePickerControllerDelegate, UINavigationContr
 }
 
 extension HomeViewController: UITextFieldDelegate {
-    
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let userName = contentView.nameTextField.text ?? ""

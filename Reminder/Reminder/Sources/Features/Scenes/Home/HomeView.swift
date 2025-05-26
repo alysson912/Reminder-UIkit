@@ -8,13 +8,13 @@
 import UIKit
 
 protocol HomeFlowDelegate: AnyObject {
+    func navigateToRecipes()
     func logoutButtonAction()
- //   func navigateToRecipes()
-   
 }
 
-protocol HomeViewImageUserDelegate: AnyObject {
+protocol HomeViewDelegate: AnyObject {
     func didTapProfileImage()
+    
 }
 
 class HomeView: UIView {
@@ -27,9 +27,9 @@ class HomeView: UIView {
     }
     
     //MARK: IMAGEPICKER DELEGATE
-    private weak var homeDelegate: HomeViewImageUserDelegate?
+    private weak var homeDelegate: HomeViewDelegate?
     
-    public func homeDelegate(homeDelegate: HomeViewImageUserDelegate?) {
+    public func homeDelegate(homeDelegate: HomeViewDelegate?) {
         self.homeDelegate = homeDelegate
     }
     
@@ -97,7 +97,7 @@ class HomeView: UIView {
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Metrics.huge
+        imageView.layer.cornerRadius = Metrics.high
         return imageView
     }()
 

@@ -8,7 +8,8 @@
 import UIKit
 
 class BottomHomeView: UIView {
-
+    //MARK: // closure: quem implementar decidirá o que será feito
+    var tapAction: (() -> Void)?
  
    private var iconView: UIView = {
        let view = UIView()
@@ -72,6 +73,7 @@ class BottomHomeView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 10
 
+        setupGesture()
         setupUI()
         setupConstraints()
     }
@@ -81,6 +83,16 @@ class BottomHomeView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        self.addGestureRecognizer(tapGesture)
+        self.isUserInteractionEnabled = true
+    }
+    @objc private func handleTap() {
+        tapAction?()
+    }
+    
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([

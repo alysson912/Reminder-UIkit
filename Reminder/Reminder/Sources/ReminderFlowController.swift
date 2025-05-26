@@ -56,12 +56,18 @@ extension ReminderFlowController: SplashFlowDelegate {
 
 
 extension ReminderFlowController: HomeFlowDelegate {
-    
-    
     func logoutButtonAction() {
-        UserDefaultsManager.removeUser()
-        navigationController?.popViewController(animated: true)
+            UserDefaultsManager.removeUser()
+            navigationController?.popViewController(animated: true)
+        }
+    
+    
+    func navigateToRecipes() {
+        let recipesViewController = viewControllerFactory.makeNewReceiptController()
+        self.navigationController?.pushViewController(recipesViewController, animated: true)
     }
+    
+
     
 }
 

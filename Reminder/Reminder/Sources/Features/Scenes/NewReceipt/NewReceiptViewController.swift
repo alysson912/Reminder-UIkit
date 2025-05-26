@@ -9,7 +9,7 @@ import UIKit
 
 class NewReceiptViewController: UIViewController {
     
-     var contentView: NewReceiptView?
+     var contentView = NewReceiptView()
     
   //  private weak var flowDelegate: NewReceiptViewDelegate?
     
@@ -19,10 +19,7 @@ class NewReceiptViewController: UIViewController {
 //        super.init(nibName: nil, bundle: nil)
 //    }
     
-    override func loadView() {
-        contentView = NewReceiptView()
-        view = contentView
-    }
+ 
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -30,22 +27,27 @@ class NewReceiptViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = Colors.gray800
-        
+        view.addSubview(contentView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
-        self.contentView?.delegate(delegate: self)
+        self.contentView.delegate(delegate: self)
     
     }
     
  
     
     private func setupConstraints(){
-        contentView?.translatesAutoresizingMaskIntoConstraints = false
-     //   contentView.inputViewController?.setupContentViewToBounds(contentView: contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: view.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 

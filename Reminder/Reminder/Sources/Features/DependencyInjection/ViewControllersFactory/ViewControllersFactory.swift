@@ -11,7 +11,7 @@ protocol ViewControllersFactoryProtocol: AnyObject {
     func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashVC
     func makeLoginViewController(flowDelegate: LoginBottomSheetFlowDelegate) -> LoginBottomSheetViewController
     func makeHomeViewController(flowDelegate: HomeFlowDelegate) -> HomeViewController
-   // func makeNewReceiptController(flowDelegate: NewReceiptViewDelegate) -> NewReceiptViewController
+    func makeNewReceiptController(/*flowDelegate: NewReceiptViewDelegate*/) -> NewReceiptViewController
 }
 
 
@@ -35,9 +35,10 @@ final class ViewControllersFactory: ViewControllersFactoryProtocol {
         return viewController
     }
     
-//    func makeNewReceiptController(flowDelegate: NewReceiptViewDelegate) -> NewReceiptViewController {
-//        let contentView = NewReceiptView()
-//        let viewController = NewReceiptViewController(contentView: contentView, flowDelegate: flowDelegate)
-//        return viewController
-//    }
+    func makeNewReceiptController(/*flowDelegate: NewReceiptViewDelegate*/) -> NewReceiptViewController {
+       // let contentView = NewReceiptView()
+      //  let viewController = NewReceiptViewController(contentView: contentView, flowDelegate: flowDelegate)
+        let viewController = NewReceiptViewController()
+        return viewController
+    }
 }
