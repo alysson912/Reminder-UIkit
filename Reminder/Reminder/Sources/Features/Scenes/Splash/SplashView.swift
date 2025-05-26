@@ -8,8 +8,7 @@
 import UIKit
 
 class SplashView: UIView {
-        
-    
+            
     lazy var backGroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +24,6 @@ class SplashView: UIView {
         image.tintColor = .white
         return image
     }()
-    
     
     
     private func addViews() {

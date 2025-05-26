@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseAuth
 
-class LoginBottomSheetViewModel {
+final class LoginBottomSheetViewModel {
     
     var successResult: ((String) -> Void)? // closures
     var errorResult: ((String) -> Void)?
@@ -23,12 +23,7 @@ class LoginBottomSheetViewModel {
                 self?.successResult?(userNameLogin)
             }
         }
-        
     }
-    
 
-   
-    
-    
     
 }

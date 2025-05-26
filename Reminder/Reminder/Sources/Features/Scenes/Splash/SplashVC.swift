@@ -47,8 +47,6 @@ class SplashVC: UIViewController {
         }
     }
     
-    
-    
     private func setup() {
         view.addSubview(contentView)
         navigationController?.isNavigationBarHidden = true
@@ -86,8 +84,6 @@ extension SplashVC {
             self.decideNavigationFlow()
         }
     }
-    
-
     
     private func animateLogoUp() {
         UIView.animate(withDuration: 0.5,

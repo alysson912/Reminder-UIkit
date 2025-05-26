@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B24D5192DE508F500289718 /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 4B24D5182DE508F500289718 /* SQLite */; };
 		4B3619DB2DC01B25008CA9C7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3619DA2DC01B25008CA9C7 /* FirebaseAnalytics */; };
 		4B3619DD2DC01B25008CA9C7 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3619DC2DC01B25008CA9C7 /* FirebaseAnalyticsOnDeviceConversion */; };
 		4B3619DF2DC01B25008CA9C7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4B3619DE2DC01B25008CA9C7 /* FirebaseAuth */; };
@@ -53,6 +54,7 @@
 				4B3619E32DC01B25008CA9C7 /* FirebaseCrashlytics in Frameworks */,
 				4B3619E12DC01B25008CA9C7 /* FirebaseCore in Frameworks */,
 				4B3619E92DC01B25008CA9C7 /* FirebaseStorage in Frameworks */,
+				4B24D5192DE508F500289718 /* SQLite in Frameworks */,
 				4B3619DD2DC01B25008CA9C7 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
 				4B3619E72DC01B25008CA9C7 /* FirebaseFirestore in Frameworks */,
 			);
@@ -105,6 +107,7 @@
 				4B3619E42DC01B25008CA9C7 /* FirebaseDatabase */,
 				4B3619E62DC01B25008CA9C7 /* FirebaseFirestore */,
 				4B3619E82DC01B25008CA9C7 /* FirebaseStorage */,
+				4B24D5182DE508F500289718 /* SQLite */,
 			);
 			productName = Reminder;
 			productReference = 4B3618FB2DA7245D008CA9C7 /* Reminder.app */;
@@ -136,6 +139,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				4B3619D92DC01B25008CA9C7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				4B24D5172DE508F500289718 /* XCRemoteSwiftPackageReference "SQLite.swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 4B3618FC2DA7245D008CA9C7 /* Products */;
@@ -379,6 +383,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		4B24D5172DE508F500289718 /* XCRemoteSwiftPackageReference "SQLite.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stephencelis/SQLite.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.15.3;
+			};
+		};
 		4B3619D92DC01B25008CA9C7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -390,6 +402,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		4B24D5182DE508F500289718 /* SQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4B24D5172DE508F500289718 /* XCRemoteSwiftPackageReference "SQLite.swift" */;
+			productName = SQLite;
+		};
 		4B3619DA2DC01B25008CA9C7 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 4B3619D92DC01B25008CA9C7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

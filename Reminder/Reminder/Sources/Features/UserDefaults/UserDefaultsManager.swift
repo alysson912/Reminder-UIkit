@@ -3,12 +3,12 @@
 //  Reminder
 //
 //  Created by ALYSSON MENEZES on 03/05/25.
-//
+//MARK: GUARDAR COISAS SIMPLES
 
 import Foundation
 import UIKit
 
-class UserDefaultsManager {
+final class UserDefaultsManager {
     private static let userKey = "userKey"
     private static let userNameKey = "userNameKey"
     private static let profileImageKey = "profileImageKey"
@@ -31,7 +31,6 @@ class UserDefaultsManager {
             UserDefaults.standard.set(imageData, forKey: profileImageKey)
         }
     }
-    
     
     
     static func loadUser() -> User? {
@@ -60,7 +59,6 @@ class UserDefaultsManager {
         UserDefaults.standard.removeObject(forKey: userNameKey)
         UserDefaults.standard.removeObject(forKey: profileImageKey)
         UserDefaults.standard.synchronize()
-        
     }
     
     static func removeUserName() {

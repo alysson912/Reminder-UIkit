@@ -14,7 +14,6 @@ protocol ViewControllersFactoryProtocol: AnyObject {
     func makeNewReceiptController(/*flowDelegate: NewReceiptViewDelegate*/) -> NewReceiptViewController
 }
 
-
 final class ViewControllersFactory: ViewControllersFactoryProtocol {
    
     func makeSplashViewController(flowDelegate: SplashFlowDelegate) -> SplashVC {

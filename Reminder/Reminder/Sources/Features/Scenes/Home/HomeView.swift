@@ -191,7 +191,7 @@ class HomeView: UIView {
             profileBackGroundView.heightAnchor.constraint(equalToConstant: Metrics.backgroundProfileSize),
             
            
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Metrics.small),
+            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Metrics.medium),
             profileImageView.leadingAnchor.constraint(equalTo: profileBackGroundView.leadingAnchor, constant: Metrics.medium),
             profileImageView.heightAnchor.constraint(equalToConstant: Metrics.profileImageSize),
             profileImageView.widthAnchor.constraint(equalToConstant: Metrics.profileImageSize),

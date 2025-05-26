@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ReminderFlowController {
+final class ReminderFlowController {
     
     //MARK: - Properties
     public var navigationController: UINavigationController?
@@ -31,10 +31,8 @@ extension ReminderFlowController: LoginBottomSheetFlowDelegate {
     func navigateToHome() {
         self.navigationController?.dismiss(animated: true)
         let vc = viewControllerFactory.makeHomeViewController(flowDelegate: self)//UIViewController()
-      //  vc.view.backgroundColor = .red
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
    
     
 }
@@ -48,7 +46,6 @@ extension ReminderFlowController: SplashFlowDelegate {
         navigationController?.present(loginBottomSheet, animated: false) {
             loginBottomSheet.animatedShow()
         }
-        
     }
     
     
@@ -61,13 +58,10 @@ extension ReminderFlowController: HomeFlowDelegate {
             navigationController?.popViewController(animated: true)
         }
     
-    
     func navigateToRecipes() {
         let recipesViewController = viewControllerFactory.makeNewReceiptController()
         self.navigationController?.pushViewController(recipesViewController, animated: true)
     }
-    
-
     
 }
 
