@@ -9,17 +9,8 @@ import UIKit
 
 class NewReceiptViewController: UIViewController {
     
-     var contentView = NewReceiptView()
-    
-  //  private weak var flowDelegate: NewReceiptViewDelegate?
-    
-//    init(contentView: NewReceiptView, flowDelegate: NewReceiptViewDelegate) {
-//        self.contentView = contentView
-//        self.flowDelegate = flowDelegate
-//        super.init(nibName: nil, bundle: nil)
-//    }
-    
- 
+    private var contentView = NewReceiptView()
+    private let viewModel = NewReceiptViewModel()
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
@@ -38,8 +29,6 @@ class NewReceiptViewController: UIViewController {
     
     }
     
- 
-    
     private func setupConstraints(){
         contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -49,11 +38,22 @@ class NewReceiptViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+   
 }
 
 extension NewReceiptViewController: NewReceiptViewDelegate {
     func addButtonAction() {
-        print("addButton pressionado!")
+        let remedy = contentView.remedyInput.getText()
+        let time = contentView.timeInput.getText()
+        let recurrence = contentView.recurrenceInput.getText()
+        let takeNow = false
+        
+        viewModel.addReceipt(remedy: remedy,
+                             time: time,
+                             recurrence: recurrence,
+                             takeNow: takeNow)
+        print("receita: \(remedy) adicionado")
     }
     
     func backButtonAction() {

@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 class HomeViewController: UIViewController {
     
     private var contentView: HomeView
@@ -30,6 +28,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         
         contentView.homeDelegate(homeDelegate: self)
+        contentView.delegate(delegate: self)
         contentView.setupNameTextField(delegate: self)
         dismissKeyboard()
         
@@ -59,25 +58,29 @@ class HomeViewController: UIViewController {
     private func setupActionForNewRecipe() {
         // disparar o click do botao
         contentView.newPrescritonButton.tapAction = { [weak self] in
-            self?.didTapNewPrescritionButton()
+            self?.navigateToRecipes()
         }
     }
     
 }
 
 
-//MARK: HOMEIMAGE DELEGATE
-extension HomeViewController: HomeViewDelegate {
+
+extension HomeViewController: HomeFlowDelegate {
+  
     func didTapProfileImage() {
         selectProfileImage()
     }
-    
-    func didTapNewPrescritionButton() {
-        flowDelegate?.navigateToRecipes()
-    }
-    
+  
     func logoutButtonAction() {
         flowDelegate?.logoutButtonAction()
+    }
+}
+//MARK: HOMEIMAGE DELEGATE
+
+extension HomeViewController: HomeViewDelegate {
+    func navigateToRecipes() {
+        flowDelegate?.navigateToRecipes()
     }
 }
 

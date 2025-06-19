@@ -14,7 +14,7 @@ class DBHelper {
     static let shared = DBHelper()
     private var db: OpaquePointer?
     
-    
+  
     private init() {
         openDatabase()
         createTable()

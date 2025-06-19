@@ -123,7 +123,7 @@ class HomeView: UIView {
         btn.setTitleColor(Colors.gray800, for: .normal)
         btn.clipsToBounds = true
         btn.layer.cornerRadius = Metrics.medium
-        btn.addTarget(self, action: #selector(tappedLogOutButton), for: .touchUpInside)
+      //  btn.addTarget(self, action: #selector(tappedLogOutButton), for: .touchUpInside)
         return btn
     }()
     
