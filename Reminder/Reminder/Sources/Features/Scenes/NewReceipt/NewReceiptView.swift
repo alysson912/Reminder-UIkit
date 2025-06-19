@@ -110,7 +110,6 @@ class NewReceiptView: UIView {
         delegate?.addButtonAction()
     }
     
-  
     private func setupUI() {
         addSubview(backButton)
         addSubview(titleLabel)
@@ -123,7 +122,11 @@ class NewReceiptView: UIView {
         
         setupRecurrenceInput()
         setupTimeInput()
+        setupObservers()
+        validateInputs()
     }
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -192,6 +195,8 @@ class NewReceiptView: UIView {
         formatter.timeStyle = .short
         timeInput.textField.text = formatter.string(from: timePicker.date)
         timeInput.textField.resignFirstResponder()
+        
+        validateInputs()
     }
     
 
@@ -206,8 +211,23 @@ class NewReceiptView: UIView {
         recurrenceInput.textField.inputView = recurrencePicker
         recurrenceInput.textField.inputAccessoryView = toobar
         
-        recurrencePicker.delegate = self
-        recurrencePicker.dataSource = self
+        
+    }
+    
+    private func validateInputs() {
+        let isRemedyFilled = !(remedyInput.textField.text ?? "").isEmpty
+        let isTimeFilled = !(timeInput.textField.text ?? "").isEmpty
+        let isReccurenceFilled = !(recurrenceInput.textField.text ?? "").isEmpty
+        
+        addButton.isEnabled = isRemedyFilled && isTimeFilled && isReccurenceFilled
+        addButton.backgroundColor = addButton.isEnabled ? Colors.primaryRedBase : Colors.gray500
+    }
+    
+    private func setupObservers() {
+        
+        remedyInput.textField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
+        timeInput.textField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
+        recurrenceInput.textField.addTarget(self, action: #selector(inputDidChange), for: .editingChanged)
     }
     
     @objc
@@ -216,20 +236,11 @@ class NewReceiptView: UIView {
         recurrenceInput.textField.text = recurrenceOptions[selectedRow]
         recurrenceInput.textField.resignFirstResponder()
     }
-
-}
-
-
-extension NewReceiptView: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return recurrenceOptions.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return recurrenceOptions[row]
+@objc
+    private func inputDidChange() {
+        validateInputs()
     }
 }
+
+
+

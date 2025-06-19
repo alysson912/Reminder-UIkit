@@ -26,7 +26,8 @@ class NewReceiptViewController: UIViewController {
         setupUI()
         setupConstraints()
         self.contentView.delegate(delegate: self)
-    
+        contentView.recurrencePicker.delegate = self
+        contentView.recurrencePicker.dataSource = self
     }
     
     private func setupConstraints(){
@@ -61,4 +62,18 @@ extension NewReceiptViewController: NewReceiptViewDelegate {
     }
     
     
+}
+
+extension NewReceiptViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return contentView.recurrenceOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return contentView.recurrenceOptions[row]
+    }
 }
