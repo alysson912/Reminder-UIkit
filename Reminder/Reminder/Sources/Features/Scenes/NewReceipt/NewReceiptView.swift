@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol NewReceiptViewDelegate: AnyObject {
+protocol NewReceiptViewFlowDelegate: AnyObject {
     func backButtonAction()
     func addButtonAction()
  //   func navigateToRecipes()
@@ -17,12 +17,13 @@ protocol NewReceiptViewDelegate: AnyObject {
 class NewReceiptView: UIView {
 
   
-    private weak var delegate: NewReceiptViewDelegate?
+    private weak var flowDelegate: NewReceiptViewFlowDelegate?
     
-    public func delegate(delegate: NewReceiptViewDelegate?) {
-        self.delegate = delegate
+    public func flowDelegate(flowDelegate: NewReceiptViewFlowDelegate?) {
+        self.flowDelegate = flowDelegate
     }
     
+  
     lazy var backButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -100,14 +101,19 @@ class NewReceiptView: UIView {
         "1 por dia"
     ]
     
+//    func setupDelegateTextFields(delegate: UITextFieldDelegate) {
+//        remedyInput.textField.delegate = delegate
+//   }
+    
+    
     @objc
     private func tappedBackButton() {
-        delegate?.backButtonAction()
+        flowDelegate?.backButtonAction()
     }
     
     @objc
     private func tappedAddButton() {
-        delegate?.addButtonAction()
+        flowDelegate?.addButtonAction()
     }
     
     private func setupUI() {
@@ -124,6 +130,8 @@ class NewReceiptView: UIView {
         setupTimeInput()
         setupObservers()
         validateInputs()
+        
+        
     }
     
     

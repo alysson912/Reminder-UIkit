@@ -19,15 +19,17 @@ class NewReceiptViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = Colors.gray800
         view.addSubview(contentView)
+        
+        self.contentView.flowDelegate(flowDelegate: self)
+        contentView.recurrencePicker.delegate = self
+        contentView.recurrencePicker.dataSource = self
+        dismissKeyboard()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
-        self.contentView.delegate(delegate: self)
-        contentView.recurrencePicker.delegate = self
-        contentView.recurrencePicker.dataSource = self
     }
     
     private func setupConstraints(){
@@ -43,7 +45,14 @@ class NewReceiptViewController: UIViewController {
    
 }
 
-extension NewReceiptViewController: NewReceiptViewDelegate {
+//extension NewReceiptViewController: UITextFieldDelegate {
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+//}
+
+extension NewReceiptViewController: NewReceiptViewFlowDelegate {
     func addButtonAction() {
         let remedy = contentView.remedyInput.getText()
         let time = contentView.timeInput.getText()
