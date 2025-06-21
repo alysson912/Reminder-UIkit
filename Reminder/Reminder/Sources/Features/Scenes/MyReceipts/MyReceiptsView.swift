@@ -7,16 +7,18 @@
 
 import UIKit
 
-protocol MyReceiptsViewDelegate: AnyObject {
+
+protocol MyReceiptsFlowDelegate: AnyObject {
+    func goToReceipts()
     func actionTappedBackButton()
     func actionTappedAddButton()
 }
 
 class MyReceiptsView: UIView {
 
-    private weak var delegate: MyReceiptsViewDelegate?
+    private weak var delegate: MyReceiptsFlowDelegate?
     
-    public func delegate(delegate: MyReceiptsViewDelegate?) {
+    public func delegate(delegate: MyReceiptsFlowDelegate?) {
         self.delegate = delegate
     }
     

@@ -20,7 +20,7 @@ class NewReceiptViewController: UIViewController {
         view.backgroundColor = Colors.gray800
         view.addSubview(contentView)
         
-        self.contentView.flowDelegate(flowDelegate: self)
+        contentView.flowDelegate(flowDelegate: self)
         contentView.recurrencePicker.delegate = self
         contentView.recurrencePicker.dataSource = self
         dismissKeyboard()
@@ -53,6 +53,10 @@ class NewReceiptViewController: UIViewController {
 //}
 
 extension NewReceiptViewController: NewReceiptViewFlowDelegate {
+    func goToNewReceips() {
+        
+    }
+    
     func addButtonAction() {
         let remedy = contentView.remedyInput.getText()
         let time = contentView.timeInput.getText()

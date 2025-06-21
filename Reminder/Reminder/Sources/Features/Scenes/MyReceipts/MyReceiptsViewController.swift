@@ -10,14 +10,18 @@ import UIKit
 class MyReceiptsViewController: UIViewController {
     
     private var contentView: MyReceiptsView
+    private weak var flowDelegate: MyReceiptsFlowDelegate?
+    
+  
+    
+    init(contentView: MyReceiptsView, flowDelegate: MyReceiptsFlowDelegate) {
+        self.contentView = contentView
+        self.flowDelegate = flowDelegate
+        super.init(nibName: nil, bundle: nil)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.isNavigationBarHidden = true
-    }
-    
-    init(contenView: MyReceiptsView) {
-        self.contentView = contenView
-        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -53,9 +57,14 @@ class MyReceiptsViewController: UIViewController {
     
 }
 
-extension MyReceiptsViewController: MyReceiptsViewDelegate {
-    func actionTappedBackButton() {
+extension MyReceiptsViewController: MyReceiptsFlowDelegate {
+   
+    func goToReceipts() {
         
+    }
+    
+    func actionTappedBackButton() {
+        flowDelegate?.actionTappedBackButton()
     }
     
     func actionTappedAddButton() {

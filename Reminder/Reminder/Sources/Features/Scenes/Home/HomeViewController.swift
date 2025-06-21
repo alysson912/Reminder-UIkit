@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
         setupActionForNewRecipe()
         checkForExistingData()
     }
-
+    
     private func setupUI() {
         navigationController?.navigationBar.isHidden = true
         view.backgroundColor = Colors.gray600
@@ -45,14 +45,14 @@ class HomeViewController: UIViewController {
     }
     
     //MARK: Buscando dados sauvos no UserDefaults
-   private func checkForExistingData() {
+    private func checkForExistingData() {
         if let user = UserDefaultsManager.loadUser() {
             contentView.nameTextField.text = UserDefaultsManager.loadUserName()
         }
-       
-       if let savedImage = UserDefaultsManager.loadUserImage() {
-           contentView.profileImageView.image = savedImage
-       }
+        
+        if let savedImage = UserDefaultsManager.loadUserImage() {
+            contentView.profileImageView.image = savedImage
+        }
     }
     
     private func setupActionForNewRecipe() {
@@ -60,13 +60,23 @@ class HomeViewController: UIViewController {
         contentView.newPrescritonButton.tapAction = { [weak self] in
             self?.navigateToRecipes()
         }
+        contentView.myPrescriptionButton.tapAction = { [weak self] in
+            self?.didTapMyPrescription()
+        }
+        
     }
-    
 }
 
-
-
 extension HomeViewController: HomeFlowDelegate {
+    func navigateToMyRecipes() {
+        
+    }
+    
+    
+    
+    func didTapMyPrescription() {
+        flowDelegate?.navigateToMyRecipes()
+    }
   
     func didTapProfileImage() {
         selectProfileImage()

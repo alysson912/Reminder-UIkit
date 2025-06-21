@@ -51,18 +51,58 @@ extension ReminderFlowController: SplashFlowDelegate {
     
 }
 
+//MARK: - Home
 
 extension ReminderFlowController: HomeFlowDelegate {
+    func navigateToRecipes() {
+        let receipesViewController = viewControllerFactory.makeNewReceiptController()
+        self.navigationController?.pushViewController(receipesViewController, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func navigateToMyRecipes() {
+        let myReceiptsViewController = viewControllerFactory.makeMyReceipstController(flowDelegate: self)
+        self.navigationController?.pushViewController(myReceiptsViewController, animated: true)
+    }
+    
     func logoutButtonAction() {
-           // UserDefaultsManager.removeUser()
-            navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
+        UserDefaultsManager.removeUser()
         }
     
-    func navigateToRecipes() {
-        let recipesViewController = viewControllerFactory.makeNewReceiptController()
-        self.navigationController?.pushViewController(recipesViewController, animated: true)
-    }
+   
     
 }
 
+//MARK: - MyReceipts
 
+extension ReminderFlowController: NewReceiptViewFlowDelegate {
+    func goToNewReceips() {
+        
+    }
+    
+    func backButtonAction() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func addButtonAction() {
+        
+    }
+
+}
+
+extension ReminderFlowController: MyReceiptsFlowDelegate {
+    func goToReceipts() {
+        
+    }
+    
+    func actionTappedBackButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func actionTappedAddButton() {
+        
+    }
+    
+    
+}

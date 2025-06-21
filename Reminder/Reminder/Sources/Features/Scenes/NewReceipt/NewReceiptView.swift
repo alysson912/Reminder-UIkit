@@ -10,7 +10,7 @@ import UIKit
 protocol NewReceiptViewFlowDelegate: AnyObject {
     func backButtonAction()
     func addButtonAction()
- //   func navigateToRecipes()
+    func goToNewReceips()
 }
 
 

@@ -10,6 +10,7 @@ import UIKit
 protocol HomeFlowDelegate: AnyObject {
     func navigateToRecipes()
     func logoutButtonAction()
+    func navigateToMyRecipes()
 }
 
 protocol HomeViewDelegate: AnyObject {
