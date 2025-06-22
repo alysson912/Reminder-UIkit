@@ -52,14 +52,14 @@ class MyReceiptsTableViewCellScreen: UIView {
     }()
     
     lazy var watchIcon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "watch"))
+        let imageView = UIImageView(image: UIImage(systemName: "clock"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         //imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     lazy var recurrenceIcon: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "recurrence-icon"))
+        let imageView = UIImageView(image: UIImage(systemName: "arrow.left.arrow.right"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         //imageView.contentMode = .scaleAspectFit
         return imageView
