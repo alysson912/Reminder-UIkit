@@ -79,6 +79,23 @@ class MyReceiptsView: UIView {
         return view
     }()
     
+    lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none // retirando linhas
+        tableView.showsVerticalScrollIndicator = false // desativando scrool indicator
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        // TO DO: Register
+        tableView.register(MyReceiptsTableViewCell.self, forCellReuseIdentifier: MyReceiptsTableViewCell.identifier)
+        tableView.backgroundColor = .clear
+        return tableView
+    }()
+    
+    func setupTableView(delegate: UITableViewDelegate, dataSource: UITableViewDataSource){
+        tableView.delegate = delegate
+        tableView.dataSource = dataSource
+    }
+    
     @objc
     private func tappedBackButton() {
         delegate?.actionTappedBackButton()
@@ -96,6 +113,7 @@ class MyReceiptsView: UIView {
         headerBackgroundView.addSubview(subtitleLabel)
         headerBackgroundView.addSubview(addButton)
         addSubview(contentBackGround)
+        contentBackGround.addSubview(tableView)
     }
     
     override init(frame: CGRect) {
@@ -137,6 +155,10 @@ class MyReceiptsView: UIView {
             contentBackGround.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentBackGround.bottomAnchor.constraint(equalTo: bottomAnchor),
             
+            tableView.topAnchor.constraint(equalTo: contentBackGround.topAnchor, constant: Metrics.medium),
+            tableView.leadingAnchor.constraint(equalTo: contentBackGround.leadingAnchor, constant: Metrics.medium),
+            tableView.trailingAnchor.constraint(equalTo: contentBackGround.trailingAnchor, constant: -Metrics.medium),
+            tableView.bottomAnchor.constraint(equalTo: contentBackGround.bottomAnchor),
         ])
     }
 }

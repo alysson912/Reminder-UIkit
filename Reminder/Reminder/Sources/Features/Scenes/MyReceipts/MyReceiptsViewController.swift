@@ -12,7 +12,12 @@ class MyReceiptsViewController: UIViewController {
     private var contentView: MyReceiptsView
     private weak var flowDelegate: MyReceiptsFlowDelegate?
     
-  
+  private let mockMedicamentos = [
+    ("buscopam", "13:00", "2 em 2 horas"),
+    ("buscopam", "3:00", "8 em 8 horas"),
+    ("buscopam", "00:00", "12 em 12 horas"),
+    ("buscopam", "1:00", "1x ao dia"),
+  ]
     
     init(contentView: MyReceiptsView, flowDelegate: MyReceiptsFlowDelegate) {
         self.contentView = contentView
@@ -41,6 +46,7 @@ class MyReceiptsViewController: UIViewController {
         setupUI()
         setupConstraints()
         contentView.delegate(delegate: self)
+        contentView.setupTableView(delegate: self, dataSource: self)
         
     }
     
@@ -72,4 +78,34 @@ extension MyReceiptsViewController: MyReceiptsFlowDelegate {
     }
     
     
+}
+
+extension MyReceiptsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: MyReceiptsTableViewCell.identifier, for: indexPath) as? MyReceiptsTableViewCell
+        
+        let medicamentos = mockMedicamentos[indexPath.section]
+        cell?.setupCell(title: medicamentos.0, time: medicamentos.1, recurrence: medicamentos.2)
+        
+        return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .clear
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 4
+    }
 }
