@@ -37,4 +37,10 @@ public struct Metrics {
     
     public static let homeButtonWidth: CGFloat = 24.0
     public static let homeButtonHeight: CGFloat = 24.0
+    
+    //MARK: - CELLS Size
+    
+    public static let cornerRadiusSmall: CGFloat = 8.0
+    public static let cornerRadiusMedium: CGFloat = 12.0
+    public static let cornerRadiusLarge: CGFloat = 18.0
 }

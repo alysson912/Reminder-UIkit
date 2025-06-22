@@ -25,6 +25,22 @@ extension UIViewController {
             contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        ])
     }
+}
+
+extension UIView { // tudo que herda de UIView, temos sombras do card e constraints = 0
+    
+    //MARK: Zerando Constraints
+    func pin(to superView: UIView){
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            
+            topAnchor.constraint(equalTo: superView.topAnchor),
+            leadingAnchor.constraint(equalTo: superView.leadingAnchor),
+            trailingAnchor.constraint(equalTo: superView.trailingAnchor),
+            bottomAnchor.constraint(equalTo: superView.bottomAnchor),
+        ])
+    }
+    
 }
