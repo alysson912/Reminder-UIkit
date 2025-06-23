@@ -85,6 +85,7 @@ class MyReceiptsView: UIView {
         tableView.separatorStyle = .none // retirando linhas
         tableView.showsVerticalScrollIndicator = false // desativando scrool indicator
         tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        
         // TO DO: Register
         tableView.register(MyReceiptsTableViewCell.self, forCellReuseIdentifier: MyReceiptsTableViewCell.identifier)
         tableView.backgroundColor = .clear

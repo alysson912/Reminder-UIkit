@@ -11,6 +11,7 @@ class MyReceiptsViewController: UIViewController {
     
     private var contentView: MyReceiptsView
     private weak var flowDelegate: MyReceiptsFlowDelegate?
+    private var viewModel = MyReceiptsViewModel()
     
   private let mockMedicamentos = [
     ("buscopam", "13:00", "2 em 2 horas"),
@@ -82,7 +83,7 @@ extension MyReceiptsViewController: MyReceiptsFlowDelegate {
 
 extension MyReceiptsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return viewModel.numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,16 +97,12 @@ extension MyReceiptsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 90
+        return viewModel.heightForRowAt
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = .clear
-        return headerView
-    }
+   
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 4
-    }
+    
+    
+   
 }
