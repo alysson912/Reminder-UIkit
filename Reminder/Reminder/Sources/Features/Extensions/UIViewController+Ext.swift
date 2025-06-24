@@ -43,14 +43,4 @@ extension UIView { // tudo que herda de UIView, temos sombras do card e constrai
         ])
     }
     
-    func paddingCellsItems(to superView: UIView){
-        translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            
-            topAnchor.constraint(equalTo: superView.topAnchor, constant: 10),
-            leadingAnchor.constraint(equalTo: superView.leadingAnchor),
-            trailingAnchor.constraint(equalTo: superView.trailingAnchor),
-            bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -10),
-        ])
-    }
 }

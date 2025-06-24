@@ -30,7 +30,7 @@ class MyReceiptsTableViewCell: UITableViewCell {
     }
     
     private func configConstraints(){
-        screen.paddingCellsItems(to: self)
+        screen.pin(to: self)
     }
     // setup cells
     

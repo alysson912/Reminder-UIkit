@@ -11,14 +11,9 @@ class MyReceiptsViewController: UIViewController {
     
     private var contentView: MyReceiptsView
     private weak var flowDelegate: MyReceiptsFlowDelegate?
-    private var viewModel = MyReceiptsViewModel()
+    private let viewModel = MyReceiptsViewModel()
     
-  private let mockMedicamentos = [
-    ("buscopam", "13:00", "2 em 2 horas"),
-    ("buscopam", "3:00", "8 em 8 horas"),
-    ("buscopam", "00:00", "12 em 12 horas"),
-    ("buscopam", "1:00", "1x ao dia"),
-  ]
+    private var medicines: [Medicine] = []
     
     init(contentView: MyReceiptsView, flowDelegate: MyReceiptsFlowDelegate) {
         self.contentView = contentView
@@ -42,14 +37,19 @@ class MyReceiptsViewController: UIViewController {
        // dismissKeyboard()
     }
     
+    private func loadData() {
+        medicines = viewModel.fetchData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
         contentView.delegate(delegate: self)
         contentView.setupTableView(delegate: self, dataSource: self)
-        
+        loadData()
     }
+    
     
     
     private func setupConstraints(){
@@ -83,15 +83,15 @@ extension MyReceiptsViewController: MyReceiptsFlowDelegate {
 
 extension MyReceiptsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection
+        return medicines.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: MyReceiptsTableViewCell.identifier, for: indexPath) as? MyReceiptsTableViewCell
         
-        let medicamentos = mockMedicamentos[indexPath.section]
-        cell?.setupCell(title: medicamentos.0, time: medicamentos.1, recurrence: medicamentos.2)
+        let medicinesVar = medicines[indexPath.row]
+        cell?.setupCell(title: medicinesVar.remedy, time: medicinesVar.time, recurrence: medicinesVar.recurrence)
         
         return cell ?? UITableViewCell()
     }

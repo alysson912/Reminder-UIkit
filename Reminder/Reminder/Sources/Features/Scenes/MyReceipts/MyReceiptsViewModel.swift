@@ -8,14 +8,16 @@
 import Foundation
 import UIKit
 
-final class MyReceiptsViewModel {
+ class MyReceiptsViewModel {
+    
+    
+    func fetchData() -> [Medicine] {
+        return DBHelper.shared.fetchReceipts()
+    }
     
     
     
-    
-    
-    
-    //MARK: - TableViewSetup
+    //MARK: - TableViewSetupSize
     
     public var numberOfRowsInSection: Int {
             return 5

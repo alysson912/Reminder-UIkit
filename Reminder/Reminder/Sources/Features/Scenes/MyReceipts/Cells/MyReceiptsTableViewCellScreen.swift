@@ -14,6 +14,7 @@ class MyReceiptsTableViewCellScreen: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.gray200
+        label.text = "titleLabel"
         //label.font = UIFont.systemFont(ofSize: 40, weight: .bold)
         return label
     }()
@@ -31,7 +32,9 @@ class MyReceiptsTableViewCellScreen: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.gray100
+        label.text = "titleLabel"
         label.font = Typography.tag
+        label.backgroundColor = .red
         return label
     }()
     
@@ -47,6 +50,7 @@ class MyReceiptsTableViewCellScreen: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = Colors.gray100
+        label.text = "titleLabel"
         label.font = Typography.tag
         return label
     }()

@@ -77,4 +77,25 @@ class DBHelper {
         }
         sqlite3_finalize(statment)
     }
+    
+    //MARK: BUSCANDO DADOS
+    
+    func fetchReceipts() -> [Medicine] {
+        let fetchQuery = "SELECT remedy, time, recurrence FROM Receipts"
+        var statmente: OpaquePointer?
+        var receipts: [Medicine] = []
+        
+        if sqlite3_prepare(db, fetchQuery, -1, &statmente, nil) == SQLITE_OK {
+            while sqlite3_step(statmente) == SQLITE_ROW {
+                let remedy = String(cString: sqlite3_column_text(statmente, 0))
+                let time = String(cString: sqlite3_column_text(statmente, 1))
+                let recurrence = String(cString: sqlite3_column_text(statmente, 2))
+                receipts.append(Medicine(remedy: remedy, time: time, recurrence: recurrence))
+            }
+        } else {
+            print("SELECT statement could not be prepared")
+        }
+        sqlite3_finalize(statmente)
+        return receipts
+    }
 }
